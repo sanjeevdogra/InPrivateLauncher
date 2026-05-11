@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>InPrivate Launcher – Privacy Policy</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: #f9f9f9;
+      color: #1a1a1a;
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .card {
+      max-width: 760px;
+      margin: 0 auto;
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+      padding: 2.5rem 2.5rem 3rem;
+    }
+    h1 {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #0078d4;
+      margin-bottom: 0.25rem;
+    }
+    .meta {
+      font-size: 0.85rem;
+      color: #666;
+      margin-bottom: 2rem;
+    }
+    .tldr {
+      background: #f0f6ff;
+      border-left: 4px solid #0078d4;
+      border-radius: 6px;
+      padding: 0.9rem 1.2rem;
+      margin-bottom: 2rem;
+      font-size: 0.95rem;
+      color: #333;
+    }
+    h2 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin: 2rem 0 0.6rem;
+      color: #111;
+    }
+    p, li { font-size: 0.95rem; color: #444; }
+    ul { padding-left: 1.4rem; margin-top: 0.4rem; }
+    ul li { margin-bottom: 0.35rem; }
+    code {
+      background: #f3f3f3;
+      border-radius: 4px;
+      padding: 0.1em 0.4em;
+      font-size: 0.88rem;
+      color: #0078d4;
+    }
+    a { color: #0078d4; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1rem 0;
+      font-size: 0.95rem;
+    }
+    table th, table td {
+      text-align: left;
+      padding: 0.7rem;
+      border-bottom: 1px solid #e0e0e0;
+    }
+    table th {
+      background: #f9f9f9;
+      font-weight: 600;
+      color: #111;
+    }
+    footer {
+      margin-top: 2.5rem;
+      padding-top: 1.2rem;
+      border-top: 1px solid #eee;
+      font-size: 0.82rem;
+      color: #888;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>InPrivate Launcher – Privacy Policy</h1>
+    <p class="meta">Last updated: May 2026</p>
+
+    <div class="tldr">
+      <strong>TL;DR:</strong> InPrivate Launcher operates entirely on your device.
+      It does not send any data to external servers. Administrators configure policies locally
+      via Group Policy or registry, and the extension reads them—nothing is transmitted.
+    </div>
+
+    <h2>What the Extension Does</h2>
+    <p>
+      InPrivate Launcher is a browser extension for Microsoft Edge and Google Chrome
+      that automatically opens specified URLs in InPrivate (Edge) or Guest (Chrome) browsing mode.
+      Organizations can configure URL patterns through Group Policy (GPO) or registry-based policy,
+      and individual users can also set local rules. All configuration stays on your device.
+    </p>
+
+    <h2>Data Stored Locally</h2>
+    <p>The extension stores the following on your device only:</p>
+    <ul>
+      <li><strong>User-configured rules:</strong> URL patterns, matching type (exact/prefix/wildcard), and preferences stored in browser local storage.</li>
+      <li><strong>Administrator policy:</strong> When deployed by IT, URL rules are read from your system's Group Policy registry—not stored in the extension, read at runtime.</li>
+      <li><strong>Preferences:</strong> Theme mode, auto-routing toggle, and maximum rule count.</li>
+      <li><strong>Current tab URL:</strong> Read only to match against configured rules; never stored or transmitted.</li>
+    </ul>
+
+    <h2>What We Do Not Do</h2>
+    <ul>
+      <li>We do not transmit any data over the network.</li>
+      <li>We do not use analytics, telemetry, crash reporting, or any third-party tracking.</li>
+      <li>We do not require user sign-in or accounts.</li>
+      <li>We do not use remote code or external CDNs—all logic is bundled locally.</li>
+      <li>We do not read or interact with websites except to match URLs against configured rules.</li>
+    </ul>
+
+    <h2>Permissions Explained</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Permission</th>
+          <th>Purpose</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>storage</code></td>
+          <td>Store user-configured URL rules and preferences locally in the browser.</td>
+        </tr>
+        <tr>
+          <td><code>tabs</code></td>
+          <td>Access the current tab's URL to determine if it matches configured rules and open InPrivate/Guest windows.</td>
+        </tr>
+        <tr>
+          <td><code>windows</code></td>
+          <td>Open new InPrivate (Edge) or Guest (Chrome) windows when a matching URL is detected.</td>
+        </tr>
+        <tr>
+          <td><code>webNavigation</code></td>
+          <td>Monitor navigation events to apply rules at the right moment.</td>
+        </tr>
+        <tr>
+          <td><code>&lt;all_urls&gt;</code></td>
+          <td>Necessary to match URL patterns against any web destination.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>Administrator / Enterprise Deployment</h2>
+    <p>When deployed by IT administrators:</p>
+    <ul>
+      <li>Administrators configure URL rules through Group Policy (Windows) or manual registry entries.</li>
+      <li>Configuration is stored in your system registry under <code>HKLM\SOFTWARE\Policies\</code> paths—never transmitted.</li>
+      <li>Users cannot modify administrator-set policies while they are active.</li>
+      <li>When policy is removed, the extension falls back to user-configured local rules.</li>
+      <li>No external policy server or cloud synchronization is used.</li>
+    </ul>
+
+    <h2>Your Data & Control</h2>
+    <ul>
+      <li><strong>Edit/Delete rules:</strong> Manage local rules anytime in the extension's options page.</li>
+      <li><strong>Clear history:</strong> No browsing history is stored, but user rules can be deleted at any time.</li>
+      <li><strong>Uninstall:</strong> Removes all local storage and preferences associated with the extension.</li>
+      <li><strong>Policy fallback:</strong> When administrator policy is removed, your local rules automatically become active again.</li>
+    </ul>
+
+    <h2>Security & Performance</h2>
+    <ul>
+      <li>The extension uses only standard browser APIs (chrome.storage, chrome.tabs, chrome.windows).</li>
+      <li>No external libraries or CDNs are loaded; all code is bundled at build time.</li>
+      <li>Policy data is read directly from your system registry—not downloaded or cached externally.</li>
+    </ul>
+
+    <h2>Policy Changes</h2>
+    <p>
+      We may update this privacy policy in the future. Any significant changes will be reflected
+      in future extension versions with an updated date at the top of this page.
+    </p>
+
+    <h2>Contact & Support</h2>
+    <p>
+      For questions about this privacy policy or the extension, contact your organization's
+      IT department (if deployed as enterprise policy) or the extension publisher.
+    </p>
+
+    <footer>
+      InPrivate Launcher is provided "as-is" without warranty. Use in compliance with your
+      organization's acceptable use policies. This extension is not affiliated with Microsoft
+      or Google but is designed to work with their browsers.
+    </footer>
+  </div>
+</body>
+</html>
